@@ -1,8 +1,7 @@
 package org.example.Modul10;
 
 import java.io.*;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Task3 {
     public static void main(String[] args) throws FileNotFoundException {
@@ -13,7 +12,7 @@ public class Task3 {
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line;
 
-            TreeMap<String, Integer> wordsQuantity = new TreeMap<>();
+            HashMap<String, Integer> wordsQuantity = new HashMap<>();
 
             while ((line = reader.readLine()) != null) {
                 String[] words = line.split("\\s+");
@@ -22,7 +21,18 @@ public class Task3 {
                     wordsQuantity.put(word, wordsQuantity.getOrDefault(word, 0) + 1);
                 }
             }
-            for (Map.Entry<String, Integer> entry : wordsQuantity.entrySet()) {
+
+            List<Map.Entry<String, Integer>> sortedEntries = new ArrayList<>(wordsQuantity.entrySet());
+
+            Collections.sort(sortedEntries, new Comparator<Map.Entry<String, Integer>>() {
+                @Override
+                public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
+                    return entry2.getValue().compareTo(entry1.getValue());
+                }
+            });
+
+
+            for (Map.Entry<String, Integer> entry : sortedEntries) {
                 System.out.println(entry.getKey() + " " + entry.getValue());
             }
 
@@ -30,7 +40,7 @@ public class Task3 {
             ex.printStackTrace();
         } finally {
             try {
-                if (fis !=null){
+                if (fis != null) {
                     fis.close();
                 }
             } catch (IOException ex) {
