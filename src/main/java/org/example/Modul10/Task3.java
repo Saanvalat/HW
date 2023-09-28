@@ -12,7 +12,7 @@ public class Task3 {
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line;
 
-            HashMap<String, Integer> wordsQuantity = new HashMap<>();
+            Map<String, Integer> wordsQuantity = new HashMap<>();
 
             while ((line = reader.readLine()) != null) {
                 String[] words = line.split("\\s+");
